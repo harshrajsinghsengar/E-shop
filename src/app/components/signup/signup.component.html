@@ -1,0 +1,63 @@
+<div class="text-center mt-4">
+  <main class="form-signin border rounded (submit)='signup($event)">
+    <form>
+      <img class="mb-4" src="assets/cart.png" alt="" width="72" height="72" />
+      <h1 class="h3 mb-3 fw-normal">Create Your E-Shop Account</h1>
+      <hr />
+      <p *ngIf="error" class="alert alert-danger">{{ error }}</p>
+      <p *ngIf="success" class="alert alert-success">{{ success }}</p>
+      <div class="form-floating">
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          id="inputName"
+          placeholder="Your name"
+          required
+          autofocus
+        />
+        <label for="inputName"></label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          id="inputEmail"
+          placeholder="E-mail address"
+          required
+          autofocus
+        />
+        <label for="inputEmail"></label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          id="inputPassword"
+          placeholder="Password"
+          required
+          autofocus
+        />
+        <label for="inputPassword"></label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="number"
+          name="phone"
+          class="form-control"
+          id="inputPhone"
+          placeholder="Phone number"
+          required
+          autofocus
+        />
+        <label for="inputPhone"></label>
+      </div>
+      <button class="w-100 btn btn-lg border rounded btn-primary" type="submit">
+        Create Account
+      </button>
+      <p class="mt-5 mb-3 text-muted"></p>
+    </form>
+  </main>
+</div>
