@@ -17,6 +17,7 @@
           class="form-control"
           id="inputEmail"
           placeholder="E-mail address"
+          [value]="credentials.email"
           required
           autofocus
         />
@@ -29,6 +30,7 @@
           class="form-control"
           id="inputPassword"
           placeholder="Password"
+          [value]="credentials.password"
           required
           autofocus
         />
@@ -36,7 +38,6 @@
       </div>
       <button
         class="w-100 btn btn-lg border rounded btn-primary"
-        type="submit"
         (click)="login($event)"
       >
         Login

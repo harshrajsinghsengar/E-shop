@@ -9,40 +9,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    
+  credentials :{email : string, password : string}={email:"",password:""}
   error : string ;
   success : string;
   form : HTMLFormElement
 
-  constructor(private userAService : UserService, private router : Router) { }
+  constructor(private userService : UserService, private router : Router) { }
 
   ngOnInit(): void {
   }
 
 login(event : Event){
-  event.preventDefault();
-  this.form = <HTMLFormElement>event.target
-  this.readFormValues();
-}
-
-navigateToHomePage(){
-this.router.navigate([''])
-}
-
-readFormValues(){
-let email = (<HTMLInputElement>this.form.elements.namedItem('email')).value
-let password = (<HTMLInputElement>this.form.elements.namedItem('password')).value
-}
+  // event.preventDefault();
+  // this.form = <HTMLFormElement>event.target
+  // this.readFormValues();
 
 
-this.UserService.login(credentials)
-.subscribe(
+  this.userService.login(this.credentials).subscribe(
   {
     next : (result)=>{
       console.log(result );
       this.success = result.message
       this.error = undefined
-      this.navigateToHomePage()
+     // this.navigateToHomePage()
     } , 
     error : (response : HttpErrorResponse)=>{
       console.log(response.error);
@@ -51,5 +40,6 @@ this.UserService.login(credentials)
     }
   }
 )
-
 }
+}
+
