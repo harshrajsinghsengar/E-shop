@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class UserService {
 
 
-private userSignupUrl = "http://localhost:4200/api/users/signup";
+private userSignupUrl = "http://localhost/test";
 private userLoginUrl = "http://localhost/api/users/login";
 
   constructor(private http : HttpClient) { }
