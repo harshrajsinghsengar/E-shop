@@ -2,37 +2,20 @@
   <div>
     <h6>Categories</h6>
     <hr />
-    <div class="form-check m-2">
+    <div *ngFor="let category of categories; index as i" class="form-check m-2">
       <input
+        value="{{ category._id }}"
         class="form-check-input"
         type="radio"
         name="category"
-        id="flexRadioDefault1"
+        id="a{{ i }}"
       />
-      <label class="form-check-label" for="flexRadioDefault1">
-        Default radio
-      </label>
-    </div>
-    <div class="form-check m-2">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="category"
-        id="flexRadioDefault1"
-      />
-      <label class="form-check-label" for="flexRadioDefault1">
-        Default radio
-      </label>
-    </div>
-    <div class="form-check m-2">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="category"
-        id="flexRadioDefault1"
-      />
-      <label class="form-check-label" for="flexRadioDefault1">
-        Default radio
+      <label
+        (click)="categorySelected(category._id)"
+        class="form-check-label"
+        for="a{{ i }}"
+      >
+        {{ category.name }}
       </label>
     </div>
   </div>
