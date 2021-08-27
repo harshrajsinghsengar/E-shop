@@ -9,8 +9,28 @@
     <p class="card-text">
       <b>₹ {{ product.price }}</b>
     </p>
-    <a class="btn-sm float-right btn btn-outline-primary" (click)="addToCart()"
+  </div>
+  <div class="card-footer p-0">
+    <a
+      *ngIf="!quantity; else cartQuantity"
+      class="btn-block btn btn-block btn-outline-primary"
+      (click)="addToCart()"
       >Add To Cart</a
     >
+    <ng-template #cartQuantity>
+      <div class="row no-gutters">
+        <div class="col-2">
+          <button (click)="minusQuantity()" class="btn btn-block btn-primary">
+            -
+          </button>
+        </div>
+        <div class="col text-center">{{ quantity }} in cart</div>
+        <div class="col-2">
+          <button (click)="plusQuantity()" class="btn btn-block btn-primary">
+            +
+          </button>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>
