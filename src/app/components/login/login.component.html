@@ -1,10 +1,11 @@
 <div class="text-center mt-4">
-  <main
-    class="form-signin border rounded"
-    method="post"
-    (submit)="login($event)"
-  >
-    <form>
+  <main>
+    <form
+      class="form-signin border rounded"
+      action="javascript:void(0);"
+      method="POST"
+      (submit)="login($event)"
+    >
       <img class="mb-4" src="assets/cart.png" alt="" width="72" height="72" />
       <h1 class="h3 mb-3 fw-normal">Login To Your E-Shop Account</h1>
       <hr />
@@ -36,12 +37,7 @@
         />
         <label for="inputPassword"></label>
       </div>
-      <button
-        class="w-100 btn btn-lg border rounded btn-primary"
-        (click)="login($event)"
-      >
-        Login
-      </button>
+      <button class="w-100 btn btn-lg border rounded btn-primary">Login</button>
       <p class="mt-5 mb-3 text-muted"></p>
     </form>
   </main>
