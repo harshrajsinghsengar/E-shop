@@ -12,7 +12,7 @@ export class ProductService {
   getAllProductUrl = 'http://localhost/api/products';
   constructor(private http: HttpClient, private userService: UserService) {}
 
-  getAllProducts(): Observable<Product[]> {
+  getAllProducts() {
     return this.http
       .get(this.getAllProductUrl, {
         headers: {
@@ -24,5 +24,13 @@ export class ProductService {
           return result.products;
         })
       );
+  }
+
+  getProductById(id: string) {
+    return this.http.get(`${this.getAllProductUrl}/${id}`).pipe(
+      map((result) => {
+        return <Product>result;
+      })
+    );
   }
 }
