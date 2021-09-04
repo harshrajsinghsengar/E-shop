@@ -20,7 +20,7 @@ export class StoreComponent implements OnInit {
     this.productService.getAllProducts().subscribe({
       next: (products) => {
         this.products = products;
-        console.log(this.products);
+        //console.log(this.products);
       },
       error: (error) => {
         console.log(error);

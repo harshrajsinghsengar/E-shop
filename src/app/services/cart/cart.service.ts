@@ -18,6 +18,14 @@ export class CartService {
     return this._cartObservable;
   }
 
+  readCartDataFromLocalStorage() {
+    this.cart = JSON.parse(localStorage.getItem('cart'));
+  }
+
+  writeCartDataToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+  }
+
   addToCart(product: Product) {
     let quantity = this.cart[product._id];
     if (quantity) {
@@ -26,14 +34,6 @@ export class CartService {
       this.cart[product._id] = 1;
     }
     this._cartObservable.next(this.cart);
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-  }
-
-  readCartDataFromLocalStorage() {
-    this.cart = JSON.parse(localStorage.getItem('cart'));
-  }
-
-  writeCartDataToLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
 
@@ -58,6 +58,4 @@ export class CartService {
     this.writeCartDataToLocalStorage();
     this._cartObservable.next(this.cart);
   }
-
-  removeFromCart(product: Product) {}
 }
