@@ -3,7 +3,7 @@ import { ProductService } from './../../services/product/product.service';
 import { Product } from './../../models/products';
 import { CartService } from './../../services/cart/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 
 interface CartItem {
   product: Product;
@@ -19,6 +19,7 @@ export class CartComponent implements OnInit {
   cart;
   total = 0;
   cartItems: CartItem[] = [];
+  cartSubscription: Subscription;
   constructor(
     private cartService: CartService,
     private productService: ProductService
@@ -28,9 +29,13 @@ export class CartComponent implements OnInit {
     this.subscribeCart();
   }
 
+  ngOnDestroy(): void {
+    this.cartSubscription.unsubscribe();
+  }
+
   subscribeCart() {
     let total = 0;
-    this.cartService.cartObservable.subscribe({
+    this.cartSubscription = this.cartService.cartObservable.subscribe({
       next: (cart) => {
         let observables = [];
         total = 0;

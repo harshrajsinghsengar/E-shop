@@ -1,7 +1,7 @@
 import { ProductService } from './../../services/product/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/products';
-import { observable } from 'rxjs';
+import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 
 @Component({
   selector: 'app-store',
@@ -10,14 +10,23 @@ import { observable } from 'rxjs';
 })
 export class StoreComponent implements OnInit {
   products: Product[] = [];
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.collectProducts();
+    this.route.queryParamMap.subscribe({
+      next: (paramMap: ParamMap) => {
+        let categoryId = paramMap.get('category');
+        // console.log(categoryId);
+        this.collectProducts({ category: categoryId });
+      },
+    });
   }
 
-  collectProducts() {
-    this.productService.getAllProducts().subscribe({
+  collectProducts(params) {
+    this.productService.getAllProducts(params).subscribe({
       next: (products) => {
         this.products = products;
         //console.log(this.products);

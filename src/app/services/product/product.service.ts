@@ -1,3 +1,4 @@
+import { Params } from '@angular/router';
 import { Product } from './../../models/products';
 import { map } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user/user.service';
@@ -12,9 +13,14 @@ export class ProductService {
   getAllProductUrl = 'http://localhost/api/products';
   constructor(private http: HttpClient, private userService: UserService) {}
 
-  getAllProducts() {
+  getAllProducts(params) {
+    let query = new URLSearchParams();
+    if (params['category']) {
+      query.append('category', params['category']);
+    }
+    //console.log(query.toString());
     return this.http
-      .get(this.getAllProductUrl, {
+      .get(`${this.getAllProductUrl}?${query.toString()}`, {
         headers: {
           authorization: this.userService.getToken(),
         },
