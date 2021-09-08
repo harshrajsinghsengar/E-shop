@@ -26,6 +26,11 @@ export class CartService {
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
 
+  clearCart() {
+    localStorage.removeItem('cart');
+    this._cartObservable.next({});
+  }
+
   addToCart(product: Product) {
     let quantity = this.cart[product._id];
     if (quantity) {

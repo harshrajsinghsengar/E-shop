@@ -1,9 +1,13 @@
+import { Router } from '@angular/router';
+import { OrderService } from './../../services/order/order.service';
 import { map } from 'rxjs/operators';
 import { ProductService } from './../../services/product/product.service';
 import { Product } from './../../models/products';
 import { CartService } from './../../services/cart/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { forkJoin, Subscription } from 'rxjs';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { OrderInfo, ProductInfo } from 'src/app/services/order/order.service';
 
 interface CartItem {
   product: Product;
@@ -20,8 +24,13 @@ export class CartComponent implements OnInit {
   total = 0;
   cartItems: CartItem[] = [];
   cartSubscription: Subscription;
+  modalRef: BsModalRef;
+
   constructor(
     private cartService: CartService,
+    private modalService: BsModalService,
+    private orderService: OrderService,
+    private router: Router,
     private productService: ProductService
   ) {}
 
@@ -65,5 +74,53 @@ export class CartComponent implements OnInit {
         });
       },
     });
+  }
+  openModal(form) {
+    this.modalRef = this.modalService.show(form, {
+      animated: true,
+      class: 'modal-lg',
+    });
+  }
+
+  checkOut(evnt: Event, form: HTMLFormElement) {
+    evnt.preventDefault();
+    let firstName = (<HTMLInputElement>form.elements.namedItem('firstName'))
+      .value;
+    let lastName = (<HTMLInputElement>form.elements.namedItem('lastName'))
+      .value;
+    let address = (<HTMLInputElement>form.elements.namedItem('address')).value;
+
+    let orderInfo: OrderInfo;
+    let productInfos: ProductInfo[] = [];
+    this.cartItems.forEach((e) => {
+      productInfos.push({
+        price: e.product.price,
+        productId: e.product._id,
+        quantity: e.quantity,
+      });
+    });
+
+    orderInfo = {
+      address,
+      firstName,
+      lastName,
+      products: productInfos,
+    };
+    console.log({
+      orderInfo,
+    });
+
+    this.orderService.placeOrder(orderInfo).subscribe({
+      next: (result) => {
+        this.modalRef.hide();
+        this.cartService.clearCart();
+        this.router.navigate(['orders']);
+      },
+      error: (err) => {
+        console.log({ err: 'Cannot place order!' });
+      },
+    });
+
+    return false;
   }
 }
