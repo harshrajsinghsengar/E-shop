@@ -13,8 +13,9 @@ import { UserOrdersComponent } from './components/user-orders/user-orders.compon
 import { CartComponent } from './components/cart/cart.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -29,14 +30,15 @@ import { ProductQuantityComponent } from './components/product-quantity/product-
     CartComponent,
     LoginComponent,
     SignupComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
