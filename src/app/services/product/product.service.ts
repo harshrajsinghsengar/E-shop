@@ -2,7 +2,7 @@ import { Params } from '@angular/router';
 import { Product } from './../../models/products';
 import { map } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user/user.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductService {
-  getAllProductUrl = 'http://localhost/api/products';
+  productUrl = 'http://localhost/api/products';
   constructor(private http: HttpClient, private userService: UserService) {}
 
   getAllProducts(params) {
@@ -26,7 +26,7 @@ export class ProductService {
     }
     //console.log(query.toString());
     return this.http
-      .get(`${this.getAllProductUrl}?${query.toString()}`, {
+      .get(`${this.productUrl}?${query.toString()}`, {
         headers: {
           authorization: this.userService.getToken(),
         },
@@ -39,16 +39,18 @@ export class ProductService {
   }
 
   getProductById(id: string) {
-    return this.http
-      .get(`${this.getAllProductUrl}/${id}`, {
-        headers: {
-          authorization: this.userService.getToken(),
-        },
+    return this.http.get(`${this.productUrl}/${id}`).pipe(
+      map((result) => {
+        return <Product>result;
       })
-      .pipe(
-        map((result) => {
-          return <Product>result;
-        })
-      );
+    );
+  }
+
+  saveProduct(data: FormData) {
+    return this.http.post(this.productUrl, data).pipe(
+      map((result: { message: string; product: Product }) => {
+        return <Product>result.product;
+      })
+    );
   }
 }
