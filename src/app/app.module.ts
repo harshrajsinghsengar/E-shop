@@ -16,6 +16,12 @@ import { SignupComponent } from './components/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
+import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
+import { AdminNewProductComponent } from './components/admin/admin-new-product/admin-new-product.component';
+import { AdminCustomersComponent } from './components/admin/admin-customers/admin-customers.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     LoginComponent,
     SignupComponent,
     ProductQuantityComponent,
+    AdminHomeComponent,
+    AdminDashboardComponent,
+    AdminOrdersComponent,
+    AdminProductsComponent,
+    AdminNewProductComponent,
+    AdminCustomersComponent,
   ],
   imports: [
     BrowserModule,
