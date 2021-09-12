@@ -53,4 +53,13 @@ export class ProductService {
       })
     );
   }
+
+  updateProduct(data, id) {
+    let headers = new HttpHeaders({
+      authorization: this.userService.getToken(),
+    });
+    return this.http.patch(this.productUrl + '/' + id, data, {
+      headers,
+    });
+  }
 }

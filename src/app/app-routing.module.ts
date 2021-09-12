@@ -1,3 +1,4 @@
+import { UserAuthGuardService } from './auth-guard/user-auth-guard.service';
 import { AdminCustomersComponent } from './components/admin/admin-customers/admin-customers.component';
 import { AdminNewProductComponent } from './components/admin/admin-new-product/admin-new-product.component';
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
@@ -13,15 +14,36 @@ import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'orders', component: UserOrdersComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: '', canActivate: [UserAuthGuardService], component: HomeComponent },
+  {
+    path: 'home',
+    canActivate: [UserAuthGuardService],
+    component: HomeComponent,
+  },
+  {
+    path: 'orders',
+    canActivate: [UserAuthGuardService],
+    component: UserOrdersComponent,
+  },
+  {
+    path: 'cart',
+    canActivate: [UserAuthGuardService],
+    component: CartComponent,
+  },
+  {
+    path: 'login',
+    canActivate: [UserAuthGuardService],
+    component: LoginComponent,
+  },
+  {
+    path: 'signup',
+    canActivate: [UserAuthGuardService],
+    component: SignupComponent,
+  },
   {
     path: 'admin',
     component: AdminHomeComponent,
+    canActivate: [UserAuthGuardService],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminDashboardComponent },

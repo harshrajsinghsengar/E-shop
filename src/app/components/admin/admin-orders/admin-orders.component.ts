@@ -30,7 +30,7 @@ export class AdminOrdersComponent implements OnInit {
   changeStatus(status: string, order: Order) {
     this.orderService.changeStatus({ status: status }, order._id).subscribe({
       next: (result) => {
-        console.log(result);
+        //console.log(result);
         order.status = status;
       },
     });

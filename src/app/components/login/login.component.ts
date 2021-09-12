@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from 'src/app/services/user/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,22 +17,30 @@ export class LoginComponent implements OnInit {
   error: string;
   success: string;
   form: HTMLFormElement;
-  returnUrl: any;
+  returnUrl: string;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params: ParamMap) => {
+      this.returnUrl = params.get('returnUrl');
+    });
+  }
 
   login(event: Event) {
     event.preventDefault();
     this.form = <HTMLFormElement>event.target;
-    console.log(this.form);
+    //console.log(this.form);
 
     this.readFormValues();
 
     this.userService.login(this.credentials).subscribe({
       next: (result) => {
-        console.log(result);
+        //console.log(result);
         this.success = result.message;
         this.error = undefined;
         this.navigateToHomePage();

@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   ) {
     router.events.subscribe({
       next: (event) => {
-        console.log(event);
+        //console.log(event);
 
         if (event instanceof NavigationStart) {
           let url = (<NavigationStart>event).url;

@@ -7,7 +7,7 @@
   <div class="card-body">
     <h6 class="card-title">{{ product.name }}</h6>
     <p class="card-text">
-      <b>₹ {{ product.price }}</b>
+      <b>{{ product.price | currency: "INR" }}</b>
     </p>
   </div>
   <div class="card-footer p-0">
