@@ -22,6 +22,8 @@ import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orde
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 import { AdminNewProductComponent } from './components/admin/admin-new-product/admin-new-product.component';
 import { AdminCustomersComponent } from './components/admin/admin-customers/admin-customers.component';
+import { AdminDashboardCardComponent } from './components/admin/admin-dashboard-card/admin-dashboard-card.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -43,12 +45,14 @@ import { AdminCustomersComponent } from './components/admin/admin-customers/admi
     AdminProductsComponent,
     AdminNewProductComponent,
     AdminCustomersComponent,
+    AdminDashboardCardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ModalModule.forRoot(),
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
