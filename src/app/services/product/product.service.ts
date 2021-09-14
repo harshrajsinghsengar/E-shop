@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductService {
-  productUrl = 'http://localhost/api/products';
+  productUrl = '/api/products';
   constructor(private http: HttpClient, private userService: UserService) {}
 
   getAllProducts(params) {

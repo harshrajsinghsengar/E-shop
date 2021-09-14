@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Label } from 'ng2-charts';
 import { Summary } from 'src/app/models/summary';
 import { SummaryService } from 'src/app/services/summary.service';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -36,50 +34,10 @@ export class AdminDashboardComponent implements OnInit {
     },
   };
 
-  public barChartLabels: Label[] = [
-    '2006',
-    '2007',
-    '2008',
-    '2009',
-    '2010',
-    '2011',
-    '2012',
-  ];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins = [pluginDataLabels];
-
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-  ];
   constructor(private summaryService: SummaryService) {}
 
   ngOnInit(): void {
     this.getSummary();
-  }
-
-  initChart() {
-    this.barChartData = [];
-    this.barChartLabels = [];
-    let productSummary =
-      this.summary.result.last30DaysSummary.productWise30DaysSummary;
-    let sales: number[] = [];
-    let quantities: number[] = [];
-    productSummary.forEach((element) => {
-      let name = element.product.name;
-      if (name.length > 15) {
-        name = name.substr(0, 15);
-      }
-      this.barChartLabels.push(name);
-      quantities.push(element.quantity);
-      sales.push(element.totalSale);
-    });
-
-    this.barChartData = [
-      { label: 'Sales', data: sales },
-      { label: 'Quantity', data: quantities },
-    ];
   }
 
   getSummary() {
@@ -94,12 +52,7 @@ export class AdminDashboardComponent implements OnInit {
         this.ordersTotal = summary.result.overAll.orders;
         this.usersTotal = summary.result.overAll.users;
         this.totalProducts = summary.result.overAll.products;
-
-        this.initChart();
       },
     });
-  }
-  changeChart(chartType: ChartType) {
-    this.barChartType = chartType;
   }
 }

@@ -8,7 +8,7 @@ import { Summary } from '../models/summary';
   providedIn: 'root',
 })
 export class SummaryService {
-  url = 'http://localhost/api/summary';
+  url = '/api/summary';
 
   constructor(private http: HttpClient, private userService: UserService) {}
 

@@ -9,7 +9,7 @@ import { Category } from 'src/app/models/category';
   providedIn: 'root',
 })
 export class CategoryService {
-  categoryUrl = 'http://localhost/api/categories';
+  categoryUrl = '/api/categories';
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
