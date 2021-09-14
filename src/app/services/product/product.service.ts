@@ -39,7 +39,10 @@ export class ProductService {
   }
 
   getProductById(id: string) {
-    return this.http.get(`${this.productUrl}/${id}`).pipe(
+    let headers = new HttpHeaders({
+      authorization: this.userService.getToken(),
+    });
+    return this.http.get(`${this.productUrl}/${id}`, { headers }).pipe(
       map((result) => {
         return <Product>result;
       })

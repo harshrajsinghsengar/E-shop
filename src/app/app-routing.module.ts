@@ -14,7 +14,7 @@ import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', canActivate: [UserAuthGuardService], component: HomeComponent },
+  { path: '', component: HomeComponent },
   {
     path: 'home',
     canActivate: [UserAuthGuardService],
@@ -32,12 +32,10 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    canActivate: [UserAuthGuardService],
     component: LoginComponent,
   },
   {
     path: 'signup',
-    canActivate: [UserAuthGuardService],
     component: SignupComponent,
   },
   {

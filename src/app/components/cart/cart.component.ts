@@ -46,6 +46,8 @@ export class CartComponent implements OnInit {
     let total = 0;
     this.cartSubscription = this.cartService.cartObservable.subscribe({
       next: (cart) => {
+        console.log(cart);
+
         let observables = [];
         total = 0;
         if (Object.keys(cart).length == 0) {
