@@ -13,10 +13,7 @@ export class SummaryService {
   constructor(private http: HttpClient, private userService: UserService) {}
 
   getSummary() {
-    let headers = new HttpHeaders({
-      authorization: this.userService.getToken(),
-    });
-    return this.http.get(this.url, { headers }).pipe(
+    return this.http.get(this.url).pipe(
       map((result) => {
         return <Summary>result;
       })

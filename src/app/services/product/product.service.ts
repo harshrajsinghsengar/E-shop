@@ -25,24 +25,15 @@ export class ProductService {
       query.append('max', params['max']);
     }
     //console.log(query.toString());
-    return this.http
-      .get(`${this.productUrl}?${query.toString()}`, {
-        headers: {
-          authorization: this.userService.getToken(),
-        },
+    return this.http.get(`${this.productUrl}?${query.toString()}`).pipe(
+      map((result: { count: number; products: Product[] }) => {
+        return result.products;
       })
-      .pipe(
-        map((result: { count: number; products: Product[] }) => {
-          return result.products;
-        })
-      );
+    );
   }
 
   getProductById(id: string) {
-    let headers = new HttpHeaders({
-      authorization: this.userService.getToken(),
-    });
-    return this.http.get(`${this.productUrl}/${id}`, { headers }).pipe(
+    return this.http.get(`${this.productUrl}/${id}`).pipe(
       map((result) => {
         return <Product>result;
       })
@@ -58,11 +49,6 @@ export class ProductService {
   }
 
   updateProduct(data, id) {
-    let headers = new HttpHeaders({
-      authorization: this.userService.getToken(),
-    });
-    return this.http.patch(this.productUrl + '/' + id, data, {
-      headers,
-    });
+    return this.http.patch(this.productUrl + '/' + id, data);
   }
 }

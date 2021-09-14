@@ -1,3 +1,4 @@
+import { HeaderInterceptorService } from './interceptor/header-interceptor.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -13,7 +14,7 @@ import { UserOrdersComponent } from './components/user-orders/user-orders.compon
 import { CartComponent } from './components/cart/cart.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
@@ -52,7 +53,13 @@ import { AdminDashboardCardComponent } from './components/admin/admin-dashboard-
     HttpClientModule,
     ModalModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

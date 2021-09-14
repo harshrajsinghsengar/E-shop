@@ -22,10 +22,7 @@ export class CategoryService {
   }
 
   saveCategory(data: { title: string }) {
-    let headers = new HttpHeaders({
-      authorization: this.userService.getToken(),
-    });
-    return this.http.post(this.categoryUrl, data, { headers }).pipe(
+    return this.http.post(this.categoryUrl, data).pipe(
       map((result: { message: string; category: Category }) => {
         return result.category;
       })
