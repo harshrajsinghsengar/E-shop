@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Summary } from 'src/app/models/summary';
 import { SummaryService } from 'src/app/services/summary.service';
-import { ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -21,17 +20,6 @@ export class AdminDashboardComponent implements OnInit {
     a: '#EA7773',
     b: '#1BCA9B',
     c: '#1287A5',
-  };
-
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    scales: { xAxes: [{}], yAxes: [{}] },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      },
-    },
   };
 
   constructor(private summaryService: SummaryService) {}
