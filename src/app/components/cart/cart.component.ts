@@ -108,9 +108,7 @@ export class CartComponent implements OnInit {
       lastName,
       products: productInfos,
     };
-    console.log({
-      orderInfo,
-    });
+    //console.log({orderInfo,});
 
     this.orderService.placeOrder(orderInfo).subscribe({
       next: (result) => {
