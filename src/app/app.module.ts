@@ -24,6 +24,8 @@ import { AdminProductsComponent } from './components/admin/admin-products/admin-
 import { AdminNewProductComponent } from './components/admin/admin-new-product/admin-new-product.component';
 import { AdminCustomersComponent } from './components/admin/admin-customers/admin-customers.component';
 import { AdminDashboardCardComponent } from './components/admin/admin-dashboard-card/admin-dashboard-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { AdminDashboardCardComponent } from './components/admin/admin-dashboard-
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatSnackBarModule,
     ModalModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [
     {
