@@ -28,7 +28,7 @@ export class HeaderInterceptorService implements HttpInterceptor {
     });
     return next.handle(r).pipe(
       map((result) => {
-        console.log(result);
+        //  console.log(result);
         return result;
       }),
       catchError((err: HttpErrorResponse) => {
